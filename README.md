@@ -7,11 +7,9 @@ An AWS SQS message handler written in Python that send payments to a remote serv
 * Install the AWS CLI: https://docs.aws.amazon.com/cli/index.html?nc2=h_ql_doc_cli
 
 ## Testing and packaging
-To execute all unit tests from the root folder, from the console run: `python -m unittest discover -v -s test`
-
-In order to send latest code changes to AWS, follow these steps:
-* Zip the root `*.py` files and everything in the `dg` folder into a zip file
-* Run the following to upload the code: `aws lambda update-function-code --function-name <aws function name> --zip-file fileb://<filename>.zip`
+* To execute all unit tests, run: `python -m unittest discover -v -s test`
+* To generate the build archive, run: `gradle createArchive`
+* To upload the archive to AWS, run: `gradle awsUpload`
 
 Use the following sample event data for testing via AWS Lambda:
 ````

@@ -14,14 +14,18 @@ defaultTasks "createArchive", "awsUpload"
 // creates the zip archive used for the upload
 task createArchive(type:Zip) {
     archiveFileName = "$zipFile"
-    destinationDirectory = file("build/")
+    destinationDirectory = file("$buildDir")
     from("$projectDir") {
         include "*.py"
         include "dg/*.py"
     }
+
+    doLast() {
+        println "$buildDir/$zipFile created successfully!"
+    }
 }
 
-// starts the selenium server, so the acceptance tests can be executed in Chrome
+// updates the remote AWS function using the AWS CLI
 task awsUpload(type:Exec) {
-  commandLine "aws", "lambda", "update-function-code", "--function-name", "$awsFunctionName", "--zip-file", "fileb://build/$zipFile"
+  commandLine "aws", "lambda", "update-function-code", "--function-name", "$awsFunctionName", "--zip-file", "fileb://$buildDir/$zipFile"
 }

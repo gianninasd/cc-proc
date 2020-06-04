@@ -1,6 +1,10 @@
-#
+# class used to parse card request in CSV format
+# throws validation errors if fields have errors
 class LineParser:
 
+  # parses a comma seperated string into each field
+  # expected line format is
+  # <merc ref>,<amount>,<card>,<expiry month>,<expiry year>,<first name>,<last name>,<email>,<postal code>
   def parse( self, line ):
     tokens = str(line).strip().split(',')
 

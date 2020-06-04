@@ -3,7 +3,7 @@ from dg.CardClient import CardClient
 
 import unittest
 
-
+# integration tests for the CardClient
 class TestCardClient(unittest.TestCase):
 
   str = "jim7025,1500,4111111111111111,10,2020,Rick,Hunter,rick@sdf3.com,M5H 2N2"

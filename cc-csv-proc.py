@@ -4,7 +4,7 @@ import os
 
 # A Lambda function that processes the payload received from SQS.
 def lambda_handler( event, context ):
-  print('CC PY Reader received event..., invoked by {}'.format(context.invoked_function_arn ))
+  print('CC PY Reader received event, invoked by {}'.format(context.invoked_function_arn ))
   #print('env: {}'.format(os.environ))
 
   parser = LineParser()

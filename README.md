@@ -32,3 +32,4 @@ In order to install 3rd party dependencies in an AWS Lambda Layer, the important
 put all the contents in a `python` directory and then create your ZIP file
 * https://medium.com/@adhorn/getting-started-with-aws-lambda-layers-for-python-6e10b1f9a5d
 * https://gist.github.com/gene1wood/4a052f39490fae00e0c3#file-all_aws_lambda_modules_python3-7-txt
+* https://boto3.amazonaws.com/v1/documentation/api/latest/guide/quickstart.html

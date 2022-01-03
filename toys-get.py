@@ -4,7 +4,7 @@ import boto3
 import decimal
 
 
-# used to convert decimal values to a string
+# internal class used to convert decimal values to a string
 class DecimalEncoder(json.JSONEncoder):
     def default(self, o):
         if isinstance(o, decimal.Decimal):
@@ -12,22 +12,36 @@ class DecimalEncoder(json.JSONEncoder):
         return super(DecimalEncoder, self).default(o)
 
 
-# A Lambda function that processes the test payload
+# A Lambda function handler that processes the test payload
 def lambda_handler(event, context):
-    print('toys-get received event, invoked by {}'.format(context.invoked_function_arn))
-    # json_region = os.environ['AWS_REGION']
+    awsregion = os.environ['AWS_REGION']
+    print('toys-get received event, invoked by {} on {}'.format(context.invoked_function_arn, awsregion))
 
-    dynamodb = boto3.resource('dynamodb')
-    toys = dynamodb.Table('toys')
-    data = toys.scan()
-    items = data['Items']
-    print('all rows: {}'.format(items))
+    try:
+        dynamodb = boto3.resource('dynamodb')
+        toys = dynamodb.Table('toys2')
+        data = toys.scan()
+        items = data['Items']
+        print('all rows: {}'.format(items))
 
-    return {
-        "statusCode": 200,
-        "headers": {
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*"
-        },
-        "body": json.dumps(items, cls=DecimalEncoder)
-    }
+        return {
+            "statusCode": 200,
+            "headers": {
+                "Content-Type": "application/json",
+                "Access-Control-Allow-Origin": "*"
+            },
+            "body": json.dumps(items, cls=DecimalEncoder)
+        }
+    except Exception as err:
+        print('Unknown error occurred: {}'.format(err))
+
+        return {
+            "statusCode": 500,
+            "headers": {
+                "Content-Type": "application/json",
+                "Access-Control-Allow-Origin": "*"
+            },
+            "body": {
+                "error": "Unknown error occurred"
+            }
+        }

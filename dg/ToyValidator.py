@@ -1,3 +1,5 @@
+import datetime
+
 
 # validates the fields of a toy object
 class ToyValidator:
@@ -19,30 +21,30 @@ class ToyValidator:
         errors['pieces'] = 'Must be a valid number'
       elif pieces < 0:
         errors['pieces'] = 'Must be a valid number'
-    except Exception as ex:
+    except Exception:
       # print('Unable to verify pieces field: {}'.format(ex))
       errors['pieces'] = 'Must be a valid number'
 
     try:
-      purchaseYear = int(obj.get('purchaseYear'))
+      purchase_year = int(obj.get('purchaseYear'))
 
-      if purchaseYear is None:
+      if purchase_year is None:
         errors['purchaseYear'] = 'Must be a valid number'
-      elif purchaseYear < 2000 or purchaseYear > 2022:
+      elif purchase_year < 1990 or purchase_year > datetime.datetime.now().year:
         errors['purchaseYear'] = 'Must be a valid number'
-    except Exception as ex:
-      # print('Unable to verify pieces field: {}'.format(ex))
+    except Exception:
       errors['purchaseYear'] = 'Must be a valid number'
 
     return errors
 
   # validates the min and max length of a value
-  def valid_len(self, value, min, max):
+  @staticmethod
+  def valid_len(value, min_value, max_value):
     if value is None:
       return False
-    elif len(value) < min:
+    elif len(value) < min_value:
       return False
-    elif len(value) > max:
+    elif len(value) > max_value:
       return False
     else:
       return True

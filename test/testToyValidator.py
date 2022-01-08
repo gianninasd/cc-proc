@@ -52,7 +52,7 @@ class TestToyValidator(unittest.TestCase):
       'name': 'Rick Hunter',
       'model': 'Technic',
       'pieces': 'abc',
-      'purchaseYear': '1998'
+      'purchaseYear': '1981'
     }
 
     errors = self.val.validate(obj)

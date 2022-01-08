@@ -3,11 +3,14 @@ An AWS SQS message handler written in Python that send payments to a remote serv
 
 ## Pre-requisites
 * Install Python 3.7.x
+* Install Python 3rd Party packages:
+  * `pip3 install boto3` 
+  * `pip3 install requests` 
 * Create an AWS account
 * Install the AWS CLI: https://docs.aws.amazon.com/cli/index.html?nc2=h_ql_doc_cli
 
 ## Testing and packaging
-* To execute all unit tests, run: `python -m unittest discover -v -s test`
+* To execute all unit tests, run: `python3 -m unittest discover -v -s test`
 * To generate the build archive, run: `gradle createArchive`
 * To upload the archive to AWS, run: `gradle awsUpload`
 

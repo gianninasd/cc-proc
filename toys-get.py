@@ -24,14 +24,16 @@ def lambda_handler(event, context):
         items = data['Items']
         print('all rows: {}'.format(items))
 
-        return {
+        v = {
             "statusCode": 200,
             "headers": {
                 "Content-Type": "application/json",
                 "Access-Control-Allow-Origin": "*"
             },
-            "body": json.dumps(items, cls=DecimalEncoder)
+            "body": items
         }
+
+        return json.dumps(v, cls=DecimalEncoder).replace('\"', '"')
     except Exception as err:
         print('Unknown error occurred: {}'.format(err))
 

@@ -12,6 +12,7 @@ An AWS SQS message handler written in Python that send payments to a remote serv
 ## Testing and packaging
 * To execute all unit tests, run: `python3 -m unittest discover -v -s test`
 * To generate the build archive, run: `gradle createArchive`
+* To manually generate the build archive, run: `zip build/toys.zip toys-*.py dg/Toy*.py`
 * To upload the archive to AWS, run: `gradle awsUpload`
 
 Use the following sample event data for testing via AWS Lambda:

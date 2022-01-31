@@ -24,7 +24,7 @@ def lambda_handler(event, context):
         items = data['Items']
         print('all rows: {}'.format(items))
 
-        v = {
+        resp_json = {
             "statusCode": 200,
             "headers": {
                 "Content-Type": "application/json",
@@ -33,7 +33,7 @@ def lambda_handler(event, context):
             "body": items
         }
 
-        return json.dumps(v, cls=DecimalEncoder).replace('\"', '"')
+        return json.dumps(resp_json, cls=DecimalEncoder)
     except Exception as err:
         print('Unknown error occurred: {}'.format(err))
 
